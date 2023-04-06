@@ -7,8 +7,10 @@ module.exports = {
     let query;
     if (productId !== undefined && sort === undefined) {
       query = `SELECT * FROM Reviews WHERE product_id=${productId} AND reported=false LIMIT ${count} OFFSET ${offset}`
-    } else {
+    } else if (product_id !== undefined && sort !== undefined) {
       query = `SELECT * FROM Reviews WHERE product_id=${productId} AND reported=false LIMIT ${count} OFFSET ${offset} ORDER BY ${sort}`
+    } else {
+      return 'Please include a product_id';
     }
     return pool.query(query).then(response => {
       return response.rows;
@@ -18,7 +20,7 @@ module.exports = {
   },
   insert: function (review, req, res) {
     console.log(review)
-    review.product_id = 37311;
+    review.product_id = req.query.product_id;
     review.datet = new Date().toString();
     review.reported = false;
     review.helpfulness = 0;
@@ -33,5 +35,14 @@ module.exports = {
       console.log(err, 'An error occured during insert');
       res.status(500).send('Error inserting review');
     })
+  },
+  incrementHelpfulness: function (reviewId, req, res) {
+    let query = `UPDATE Reviews SET helpfulness=helpfulness + 1 WHERE review_id=${reviewId}`;
+
+    pool.query(query).then(() => {
+      res.send('Helpfulness incremented by 1 successfully');
+    }).catch((err) => {
+      res.status(500).send('Error incrementing helpfulness');
+    });
   }
 };
