@@ -3,9 +3,9 @@ const router = express.Router();
 const reviews = require('./controllers/reviews.js');
 const meta = require('./controllers/meta.js');
 
-router.get('/reviews/', reviews.get)
+router.get('/reviews/', reviews.get) // done
 
-router.get('/reviews?:product_id&?:page&?:count&?:sort', reviews.get);
+router.get('/reviews?:product_id&?:page&?:count&?:sort', reviews.get); // done
 
 router.get('/reviews/meta', meta.get);
 

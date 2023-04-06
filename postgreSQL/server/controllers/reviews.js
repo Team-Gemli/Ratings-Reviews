@@ -6,7 +6,6 @@ module.exports = {
     let page = req.query.page;
     let count = req.query.count;
     let sort = req.query.sort;
-    console.log(page, count, sort)
     getAll(productId, page, count, sort).then(response => {
       res.json(response);
     }).catch(err => {
@@ -14,7 +13,8 @@ module.exports = {
     })
   },
   post: function (req, res) {
-
+    let newReview = req.body;
+    insert(newReview, req, res);
   },
   helpfulness: function (req, res) {
 
