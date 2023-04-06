@@ -6,7 +6,7 @@ const pool = new Pool({
   host: process.env.HOST,
   database: process.env.DATABASE,
   password: process.env.PASSWORD,
-  port: 5432
+  port: process.env.PSQLPORT
 });
 
 pool.connect((err) => {
@@ -17,10 +17,6 @@ pool.connect((err) => {
   }
 });
 
- pool.query('SELECT * FROM Meta').then(response => {
-  console.log(response);
- }).catch(err => {
-  console.log(err.stack)
- })
+module.exports.pool = pool;
 
 

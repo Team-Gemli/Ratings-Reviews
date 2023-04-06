@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "test"
+    "test": "test",
+    "start": "nodemon --watch postgreSQL postgreSQL/server/index.js"
   },
   "repository": {
     "type": "git",

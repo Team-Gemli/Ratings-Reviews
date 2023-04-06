@@ -1,5 +1,5 @@
 const fs = require('fs');
-const { parse } = require('csv-parse');
+const { parse } = require('csv-parser');
 
 // files: characteristics_reviews, reviews, reviews_photos, characteristics
 // transforms data to array of objects. Useful for restructuring CSV files later.

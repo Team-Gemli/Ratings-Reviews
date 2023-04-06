@@ -1,16 +1,19 @@
 require('dotenv').config();
 const express = require('express');
-const db = require('./db');
+const db = require('./db/db.js');
 const morgan = require('morgan');
 const app = express();
+const {getAll} = require('./models/reviews.js')
+const {router} = require('./routes.js');
 
 app.use(morgan('dev'));
 app.use(express.json());
-app.use('/', routes);
 
-app.get('/', (res, req) => {
+app.use('/', router);
 
-});
+// app.get('/', (req, res) => {
+//   getAll(req, res);
+// });
 
 app.listen(process.env.PORT, () => {
   console.log(`App is running on port ${process.env.PORT}`);
