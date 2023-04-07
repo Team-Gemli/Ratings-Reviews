@@ -11,8 +11,8 @@ router.get('/reviews/meta', meta.get);
 
 router.post('/reviews?:product_id', reviews.post); // done
 
-router.put('/reviews/:review_id/helpful', reviews.helpfulness) // done
+router.put('/reviews/:review_id/helpful', reviews.helpfulness); // done
 
-router.put('/reviews/:review_id/report',reviews.report)
+router.put('/reviews/:review_id/report', reviews.report); //done
 
 module.exports.router = router;

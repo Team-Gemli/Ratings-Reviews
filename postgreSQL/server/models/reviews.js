@@ -44,5 +44,14 @@ module.exports = {
     }).catch((err) => {
       res.status(500).send('Error incrementing helpfulness');
     });
+  },
+  reportReview: function (reviewId, req, res) {
+    let query = `UPDATE Reviews SET reported=true WHERE review_id=${reviewId}`;
+
+    pool.query(query).then(() => {
+      res.send('Review successfully reported');
+    }).catch((err) => {
+      res.send('Failed to report review');
+    });
   }
 };

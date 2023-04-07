@@ -1,4 +1,4 @@
-const {getAll, insert, incrementHelpfulness} = require('../models/reviews.js');
+const {getAll, insert, incrementHelpfulness, reportReview} = require('../models/reviews.js');
 
 module.exports = {
   get: function (req, res) {
@@ -22,6 +22,8 @@ module.exports = {
 
   },
   report: function (req, res) {
-
+    let reviewId = req.params.review_id;
+    console.log(reviewId)
+    reportReview(reviewId, req, res);
   }
 };
