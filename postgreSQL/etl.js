@@ -1,5 +1,5 @@
 const fs = require('fs');
-const { parse } = require('csv-parser');
+const { parse } = require('csv-parse');
 
 // files: characteristics_reviews, reviews, reviews_photos, characteristics
 // transforms data to array of objects. Useful for restructuring CSV files later.
@@ -62,7 +62,7 @@ fs.createReadStream('files/characteristic_reviews.csv')
 });
 
 const reviews_photos = [];
-fs.createReadStream('files/characteristic_reviews.csv')
+fs.createReadStream('files/reviews_photos.csv')
 .pipe(
   parse({
     delimiter: ',',
@@ -77,7 +77,7 @@ fs.createReadStream('files/characteristic_reviews.csv')
   console.log(error.message);
 })
 .on('end', function () {
-  console.log(characteristic_reviews);
+  console.log(reviews_photos.length);
 });
 
 
