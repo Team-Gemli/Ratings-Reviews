@@ -29,6 +29,7 @@ module.exports = {
     let query = `INSERT INTO Reviews (product_id, rating, datet, summary, body, recommend, reported, reviewer_name, reviewer_email, response, helpfulness) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11) RETURNING review_id`;
 
     pool.query(query, [review.product_id, review.rating, review.datet, review.summary, review.body, review.recommend, review.reported, review.reviewer_name, review.reviewer_email, review.response, review.helpfulness]).then(response => {
+      pool.query(`UPDATE Meta SET "${review.rating}"="${review.rating}" + 1 WHERE product_id=${review.product_id}`);
       console.log(response.rows[0]);
       res.send('Review inserted succussfully')
     }).catch(err => {

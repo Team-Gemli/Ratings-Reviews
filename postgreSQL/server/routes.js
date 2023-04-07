@@ -7,7 +7,7 @@ router.get('/reviews/', reviews.get) // done
 
 router.get('/reviews?:product_id&?:page&?:count&?:sort', reviews.get); // done
 
-router.get('/reviews/meta', meta.get);
+router.get('/reviews/meta?:product_id', meta.get);
 
 router.post('/reviews?:product_id', reviews.post); // done
 

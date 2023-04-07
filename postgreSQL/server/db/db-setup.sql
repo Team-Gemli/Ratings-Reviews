@@ -24,16 +24,6 @@ CREATE TABLE IF NOT EXISTS Photos (
   review_id int references Reviews(review_id)
 );
 
--- CREATE TABLE IF NOT EXISTS Meta (
---   id SERIAL PRIMARY KEY,
---   avgRatings int,
---   recommendedOverall BOOLEAN,
---   avgSize int,
---   avgComfort int,
---   avgWidth int,
---   product_id int references Product(id)
--- );
-
 CREATE TABLE IF NOT EXISTS Recommended (
   recommended_id SERIAL PRIMARY KEY,
   isRecommended boolean,
@@ -43,7 +33,7 @@ CREATE TABLE IF NOT EXISTS Recommended (
 CREATE TABLE IF NOT EXISTS Characteristics (
   characteristic_id SERIAL PRIMARY KEY,
   product_id int,
-  name varchar(50),
+  name varchar(50)
 );
 
 CREATE TABLE IF NOT EXISTS Characteristic_reviews (
@@ -60,6 +50,38 @@ CREATE TABLE IF NOT EXISTS Ratings (
   product_id int
 );
 
+CREATE TABLE IF NOT EXISTS Meta (
+  product_id SERIAL PRIMARY KEY,
+  characteristic varchar(30),
+  one int,
+  two int,
+  three int,
+  four int,
+  five int,
+  recommendYes int,
+  recommendNo int,
+  width text,
+  quality text,
+  fit text,
+  comfort text,
+  length text,
+  size text
+);
+
+-- CREATE TABLE IF NOT EXISTS Temp (
+--   product_id SERIAL PRIMARY KEY,
+--   name text,
+--   slogan text,
+--   description text,
+--   category text,
+--   price int
+-- )
+
+-- COPY Temp(product_id, name, slogan, description, category, price) FROM '/home/sljivo/hackreactor/sdc/Ratings-Reviews-Gemli-SDC/files/product.csv' DELIMITER ',' CSV HEADER;
+
+-- UPDATE Meta SET product_id=Reviews.product_id;
+-- SELECT product_id, COUNT(*) FROM Reviews WHERE rating=5 GROUP BY product_id;
+
 -- COPY Product(product_id) FROM '/home/sljivo/hackreactor/sdc/Ratings-Reviews-Gemli-SDC/files/reviews.csv' DELIMITER ',' CSV HEADER;
 
 -- COPY Reviews(review_id, product_id, rating, datet, summary, body, recommend, reported, reviewer_name, reviewer_email, response, helpfulness) FROM '/home/sljivo/hackreactor/sdc/Ratings-Reviews-Gemli-SDC/files/reviews.csv' DELIMITER ',' CSV HEADER;
@@ -70,3 +92,8 @@ CREATE TABLE IF NOT EXISTS Ratings (
 
 -- COPY Photos(id, review_id, photo_url) FROM '/home/sljivo/hackreactor/sdc/Ratings-Reviews-Gemli-SDC/files/reviews_photos.csv' DELIMITER ',' CSV HEADER;
 
+--Run to update rating count to correct values if ever out of sync
+-- UPDATE Meta m                                                                                                SET one = r.count_3_ratings                                                                                            FROM (                                                                                                                    SELECT product_id, COUNT(*) AS count_3_ratings                                                                          FROM Reviews                                                                                                            WHERE rating = 1                                                                                                        GROUP BY product_id                                                                                                   ) r                                                                                                                     WHERE m.product_id = r.product_id;
+
+-- query for getting total characteristic values per product_id
+-- UPDATE meta                                                                                                  SET size = c.total_value                                                                                             FROM (                                                                                                                    SELECT c.name, c.product_id, SUM(cr.value) AS total_value                                                    FROM characteristics c                                                                                                  INNER JOIN characteristic_reviews cr                                                                                    ON c.characteristic_id = cr.characteristic_id                                                                           GROUP BY c.name, c.product_id                                                                                                    ) c                                                                                                                     WHERE meta.product_id = c.product_id;
