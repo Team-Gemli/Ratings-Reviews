@@ -97,3 +97,6 @@ CREATE TABLE IF NOT EXISTS Meta (
 
 -- query for getting total characteristic values per product_id
 -- UPDATE meta                                                                                                  SET size = c.total_value                                                                                             FROM (                                                                                                                    SELECT c.name, c.product_id, SUM(cr.value) AS total_value                                                    FROM characteristics c                                                                                                  INNER JOIN characteristic_reviews cr                                                                                    ON c.characteristic_id = cr.characteristic_id                                                                           GROUP BY c.name, c.product_id                                                                                                    ) c                                                                                                                     WHERE meta.product_id = c.product_id;
+
+-- Set id to max of table ids
+-- SELECT setval(pg_get_serial_sequence('Reviews', 'id'), (SELECT MAX(id) FROM Reviews));
