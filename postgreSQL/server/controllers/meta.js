@@ -32,7 +32,7 @@ module.exports = {
       metaData.characteristics['length'] = response.rows[0]['length'];
       metaData.characteristics['size'] = response.rows[0]['size'];
 
-      res.json(metaData);
+      res.json([metaData]);
     }).catch(err => {
       console.log(err, 'An error occured at meta.get');
     })

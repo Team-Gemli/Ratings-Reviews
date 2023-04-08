@@ -15,7 +15,7 @@ app.use('/', router);
 //   getAll(req, res);
 // });
 
-app.listen(process.env.PORT, () => {
-  console.log(`App is running on port ${process.env.PORT}`);
+module.exports = app.listen(process.env.PORT, () => {
+  // console.log(`App is running on port ${process.env.PORT}`);
 });
 
