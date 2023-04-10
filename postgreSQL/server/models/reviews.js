@@ -1,18 +1,36 @@
 const {pool, connect} = require('../db/db.js');
 
 module.exports = {
-  getAll: function (productId, page=1, count=5, sort) {
+  getAll: function (productId, page=1, count=5, sort='relevant') {
+    if (sort === 'relevant') {
+      var orderBy = 'helpfulness DESC';
+    }
+    if (sort === 'newest') {
+
+    }
+    if (sort === 'helpful') {
+
+    }
     // minus 1 * 2
     const offset = (page - 1) * count;
+
     let query;
     if (productId !== undefined && sort === undefined) {
       query = `SELECT * FROM Reviews WHERE product_id=${productId} AND reported=false LIMIT ${count} OFFSET ${offset}`
-    } else if (product_id !== undefined && sort !== undefined) {
-      query = `SELECT * FROM Reviews WHERE product_id=${productId} AND reported=false LIMIT ${count} OFFSET ${offset} ORDER BY ${sort}`
+    } else if (productId !== undefined && sort !== undefined) {
+      query = `SELECT * FROM Reviews WHERE product_id=${productId} AND reported=false ORDER BY ${orderBy} LIMIT ${count} OFFSET ${offset} `
     } else {
       return 'Please include a product_id';
     }
+
     return pool.query(query).then(response => {
+      for (var i = 0; i < response.rows.length; i++) {
+        var obj = response.rows[i];
+        obj.date = obj.datet;
+        obj.photos = [];
+        delete obj.datet;
+      }
+
       return response.rows;
      }).catch(err => {
       console.log(err.stack)

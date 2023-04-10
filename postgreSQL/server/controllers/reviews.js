@@ -7,7 +7,8 @@ module.exports = {
     let count = req.query.count;
     let sort = req.query.sort;
     getAll(productId, page, count, sort).then(response => {
-      res.json(response);
+      let reviews = {product: productId, page: page, count: count, results: response}
+      res.json(reviews);
     }).catch(err => {
       console.log(err, 'An error occured at reviews.get');
     })
