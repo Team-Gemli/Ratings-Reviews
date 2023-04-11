@@ -7,7 +7,7 @@ CREATE TABLE IF NOT EXISTS Reviews (
   review_id SERIAL PRIMARY KEY NOT NULL,
   product_id int,
   rating int,
-  datet bigint,
+  datet timestamp,
   summary varchar(255),
   body varchar(1000),
   recommend BOOLEAN,
@@ -53,11 +53,11 @@ CREATE TABLE IF NOT EXISTS Ratings (
 CREATE TABLE IF NOT EXISTS Meta (
   product_id SERIAL PRIMARY KEY,
   characteristic varchar(30),
-  one int,
-  two int,
-  three int,
-  four int,
-  five int,
+  "1" int,
+  "2" int,
+  "3" int,
+  "4" int,
+  "5" int,
   recommendYes int,
   recommendNo int,
   width text,
@@ -78,6 +78,8 @@ CREATE TABLE IF NOT EXISTS Meta (
 -- )
 
 -- COPY Temp(product_id, name, slogan, description, category, price) FROM '/home/sljivo/hackreactor/sdc/Ratings-Reviews-Gemli-SDC/files/product.csv' DELIMITER ',' CSV HEADER;
+-- COPY Meta(product_id, characteristic, 1, 2, 3, 4, 5, recommendYes, recommendNo, width, quality, fit, comfort, length, size) DELIMITER ',' CSV HEADER;
+-- COPY Reviews (review_id, product_id, rating, datet, summary, body, recommend, reported, reviewer_name, reviewer_email, response, helpfulness) FROM 'files/reviews.csv' DELIMITER ',' CSV HEADER;
 
 -- UPDATE Meta SET product_id=Reviews.product_id;
 -- SELECT product_id, COUNT(*) FROM Reviews WHERE rating=5 GROUP BY product_id;
