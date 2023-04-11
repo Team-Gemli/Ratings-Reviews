@@ -16,7 +16,7 @@ router.put('/reviews/:review_id/helpful', reviews.helpfulness); // done
 router.put('/reviews/:review_id/report', reviews.report); //done
 
 router.get(`/${process.env.LOADERIO}`, (req, res) => {
-  res.sendFile('postgreSQL/loaderio-acafdc6a7e8ce93fbe88e2d9c36d1c1c.txt');
+  res.sendFile('postgreSQL/loaderio-5408f80ebe356dd823daafefdd2c5a2b.txt');
 });
 
 module.exports.router = router;
