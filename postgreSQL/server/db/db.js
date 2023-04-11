@@ -6,7 +6,8 @@ const pool = new Pool({
   host: process.env.HOST,
   database: process.env.DATABASE,
   password: process.env.PASSWORD,
-  port: process.env.PSQLPORT
+  port: process.env.PSQLPORT,
+  max: 300
 });
 
 pool.connect((err) => {
