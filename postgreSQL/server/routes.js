@@ -15,4 +15,6 @@ router.put('/reviews/:review_id/helpful', reviews.helpfulness); // done
 
 router.put('/reviews/:review_id/report', reviews.report); //done
 
+router.get(`/${process.env.LOADERIO}`);
+
 module.exports.router = router;
