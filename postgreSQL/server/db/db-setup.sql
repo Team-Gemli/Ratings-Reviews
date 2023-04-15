@@ -81,7 +81,7 @@ CREATE TABLE IF NOT EXISTS Meta (
 -- COPY Meta(product_id, characteristic, 1, 2, 3, 4, 5, recommendYes, recommendNo, width, quality, fit, comfort, length, size) DELIMITER ',' CSV HEADER;
 -- COPY Reviews (review_id, product_id, rating, datet, summary, body, recommend, reported, reviewer_name, reviewer_email, response, helpfulness) FROM 'files/reviews.csv' DELIMITER ',' CSV HEADER;
 \copy Reviews (review_id, product_id, rating, datet, summary, body, recommend, reported, reviewer_name, reviewer_email, response, helpfulness) FROM 'files/reviews.csv' DELIMITER ',' CSV HEADER;
-\copy Meta(product_id, characteristic, 1, 2, 3, 4, 5, recommendYes, recommendNo, width, quality, fit, comfort, length, size) FROM 'files/meta.csv' DELIMITER ',' CSV HEADER;
+\copy Meta(product_id, characteristic, '1', '2', '3', '4', '5', recommendYes, recommendNo, width, quality, fit, comfort, length, size) FROM 'files/meta.csv' DELIMITER ',' CSV HEADER;
 
 -- UPDATE Meta SET product_id=Reviews.product_id;
 -- SELECT product_id, COUNT(*) FROM Reviews WHERE rating=5 GROUP BY product_id;

@@ -26,12 +26,12 @@ module.exports = {
       metaData.recommend['false'] = response.rows[0]['recommendno'];
 
 
-      metaData.characteristics['width'] = {value: response.rows[0]['width']};
-      metaData.characteristics['quality'] = {value: response.rows[0]['quality']};
-      metaData.characteristics['fit'] = {value: response.rows[0]['fit']};
-      metaData.characteristics['comfort'] = {value: response.rows[0]['comfort']};
-      metaData.characteristics['length'] = {value: response.rows[0]['length']};
-      metaData.characteristics['size'] = {value: response.rows[0]['size']};
+      metaData.characteristics['Width'] = {value: response.rows[0]['width']};
+      metaData.characteristics['Quality'] = {value: response.rows[0]['quality']};
+      metaData.characteristics['Fit'] = {value: response.rows[0]['fit']};
+      metaData.characteristics['Comfort'] = {value: response.rows[0]['comfort']};
+      metaData.characteristics['Length'] = {value: response.rows[0]['length']};
+      metaData.characteristics['Size'] = {value: response.rows[0]['size']};
 
       res.json(metaData);
     }).catch(err => {
